@@ -46,7 +46,7 @@ export default function GetBalance() {
                     </Text>
                     <Flex alignItems="center" justifyContent="space-between" mb={2} lineHeight={1}>
                         <Text color="gray.400" fontSize="sm">
-                            Eth:
+                            ETH:
                         </Text>
                         <Text color="gray.400" fontSize="xl" fontWeight="semibold" ml="2">
                             {parseFloat(formatEther(useEtherBalance(address) || 0)).toFixed(3)}
