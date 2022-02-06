@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ChakraProvider, useDisclosure } from '@chakra-ui/react';
+import { DAppProvider } from '@usedapp/core';
+import theme from './theme';
+import Layout from './components/Layout';
+import ConnectButton from './components/ConnectButton';
+import GetBalance from './components/GetBalance';
+import AccountModal from './components/AccountModal';
+import '@fontsource/inter';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [active, setActive] = useState<boolean>(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    return (
+        <DAppProvider config={{}}>
+            <ChakraProvider theme={theme}>
+                <Layout>
+                    <ConnectButton handleOpenModal={onOpen} handleActive={(e: boolean) => setActive(e)} />
+                    {active && <GetBalance />}
+                </Layout>
+                <AccountModal isOpen={isOpen} onClose={onClose} handleActive={(e: boolean) => setActive(e)} />
+            </ChakraProvider>
+        </DAppProvider>
+    );
 }
 
 export default App;
